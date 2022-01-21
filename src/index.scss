@@ -1,0 +1,614 @@
+@import "main.scss";
+@import "./components/calender/calender.scss";
+@import "./components/mixins.scss";
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-white-dark: rgb(248, 248, 248);
+  --color-gray: #777;
+  --color-gray-dark: #555;
+  --color-black-light: #222f3e;
+  --color-black-dark: #111925;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  @include respond(lantab) {
+    font-size: 56.25%;
+  }
+  @include respond(portab) {
+    font-size: 60%;
+  }
+  @include respond(phone) {
+    font-size: 58%;
+  }
+  @include respond(desktop) {
+    font-size: 75%;
+  }
+}
+
+body {
+  box-sizing: border-box;
+  line-height: 1.6;
+  color: var(--color-white);
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
+/*
+  .header__profile:checked ~ {
+    display: flex;
+    width: 25rem;
+  }
+  */
+.maincontainer {
+  display: flex;
+  @include respond(portab) {
+    &:not(:last-child) {
+      flex-direction: column;
+    }
+  }
+}
+.buttonside {
+  position: fixed;
+  top: 1rem;
+  left: 4rem;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  z-index: 5000;
+  transition: all 0.5s;
+}
+/*.buttonside:focus + .maincontainer #mySidenav {
+  display: none;
+  width: 0;
+}
+
+*/
+.hidebar {
+  display: none;
+  width: 0;
+}
+
+visitchart {
+  padding: -1rem;
+  @include respond(lantab) {
+    font-size: 1.8rem;
+    color: #fff;
+  }
+}
+
+.section {
+  &--1 {
+    background-color: var(--color-black);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    color: var(--color-white);
+    scroll-behavior: smooth;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    @include respond(portab) {
+      flex: 100%;
+    }
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(48, 40, 40);
+      outline: 4px solid rgb(6, 125, 245);
+    }
+  }
+  &--2 {
+    flex: 3;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(48, 40, 40);
+      outline: 1px solid rgb(6, 125, 245);
+    }
+
+    &-childOne {
+      height: 8rem;
+      padding: 2rem;
+      background-color: #fff;
+    }
+    &-childTwo {
+      height: 25rem;
+      padding: 2rem;
+      @include respond(lantab) {
+        height: 32rem;
+        padding: 1.5rem;
+      }
+      background-color: #111925;
+      display: grid;
+      grid-template-rows: 4rem 17rem;
+      grid-template-columns: repeat(8, 1fr);
+      &-header {
+        grid-area: 1/1/2/8;
+        display: flex;
+        font-size: 1.6rem;
+        font-weight: 300;
+        @include respond(portab) {
+          font-size: 1.4rem;
+          justify-content: space-around;
+          align-items: center;
+        }
+        &-visit-1 {
+          flex: 2;
+          text-align: start;
+          text-transform: uppercase;
+          color: var(--color-white-dark);
+        }
+        &-visit-2 {
+          flex: 2;
+          text-align: end;
+
+          text-transform: uppercase;
+          color: var(--color-white);
+        }
+      }
+    }
+    &-childThree {
+      display: flex;
+      @include respond(lantab) {
+        flex-direction: column-reverse;
+      }
+    }
+  }
+
+  &--3 {
+    @include respond(portab) {
+      flex: 100%;
+    }
+    flex: 1;
+    height: 100vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(51, 51, 51);
+      outline: 4px solid rgb(6, 125, 245);
+    }
+  }
+  @keyframes upDown {
+    0% {
+      transform: scale(1);
+      box-shadow: none;
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0.5rem 0.5rem 1rem rgba($color: #000000, $alpha: 0.2);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: none;
+    }
+  }
+  &--three {
+    display: flex;
+
+    background-color: #f1f1f1;
+    &-1 {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+      height: 100vh;
+      &::-webkit-scrollbar {
+        width: 0.5rem;
+      }
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: rgb(48, 40, 40);
+        outline: 1px solid rgb(6, 125, 245);
+      }
+      &-button {
+        border-radius: 50%;
+        border: none;
+        height: 4.5rem;
+        width: 4.5rem;
+        background-color: #fff;
+        display: flex;
+        align-self: center;
+        &:not(:last-child) {
+          margin-bottom: 0.8rem;
+        }
+        &:focus {
+          animation: upDown 1s infinite;
+        }
+
+        img {
+          text-align: center;
+          width: 4.5rem;
+          height: 4.5rem;
+          border-radius: 50%;
+        }
+      }
+    }
+    &-2 {
+      width: 70%;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+      height: 100vh;
+      padding: 2rem;
+      &::-webkit-scrollbar {
+        width: 0.5rem;
+      }
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: rgb(48, 40, 40);
+        outline: 4px solid rgb(6, 125, 245);
+      }
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      &-1 {
+        color: blue;
+        flex: 0 0 70%;
+      }
+      &-2 {
+        flex: 1;
+        &-message {
+          font-family: inherit;
+          font-size: inherit;
+          display: flex;
+          flex-direction: column;
+          &-input {
+            font-size: 1.2rem;
+            height: 5rem;
+            width: 18rem;
+            border-radius: 10%;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            &::-webkit-input-placeholder {
+              color: #999;
+            }
+          }
+          &-submit {
+            align-self: flex-end;
+            padding: 0.5rem 1rem;
+            background-color: var(--color-gray-dark);
+            color: var(--color-white);
+            border-radius: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+  &--3ree {
+    display: flex;
+    justify-content: space-between;
+    color: #000;
+    border-bottom: 0.1rem solid #000;
+    padding: 1.2rem;
+    background-color: #fff;
+    box-shadow: 0.5rem 0.5rem 1rem rgba($color: #000000, $alpha: 0.2);
+    margin-bottom: 1rem;
+    img {
+      width: 5.5rem;
+      height: 5.5rem;
+      border-radius: 50%;
+    }
+    &-header {
+      font-size: 1.6rem;
+      align-self: center;
+      font-weight: 500;
+    }
+    &-bup {
+      padding: 0.2rem 1rem;
+      align-self: flex-start;
+      border-radius: 0.3rem;
+      transition: all 0.2s;
+      &:focus {
+        color: #fff;
+        background-color: #000;
+      }
+    }
+  }
+}
+
+.subsection {
+  &--1 {
+    background-color: #fff;
+    color: #000;
+    flex: 0 0 60%;
+    display: flex;
+    flex-direction: column;
+    @include respond(lantab) {
+      flex-direction: column-reverse;
+    }
+  }
+  &--2 {
+    width: 100%;
+    &_headerr {
+      @include respond(lantab) {
+        margin-bottom: 3rem;
+      }
+      font-size: 2rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.05rem;
+      margin-bottom: 1rem;
+    }
+    &_One {
+      padding: 1.5rem;
+      text-align: center;
+    }
+    &_Two {
+      width: 90%;
+      box-shadow: 0.5rem 1rem 2rem rgba($color: #000000, $alpha: 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem;
+      margin: 1rem auto;
+      border-radius: 1rem;
+    }
+    color: #000;
+
+    background-color: #fff;
+    &-right-header {
+      font-size: 1.3rem;
+      word-spacing: 0.05rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      @include respond(lantab) {
+        font-size: 1.6rem;
+        letter-spacing: 0.15rem;
+      }
+    }
+
+    &-item {
+      display: flex;
+      justify-content: space-around;
+      @include respond(lantab) {
+        justify-content: space-between;
+      }
+
+      &-1,
+      &-2,
+      &-3 {
+        width: 30%;
+        height: 10rem;
+        @include respond(lantab) {
+          height: 12rem;
+        }
+      }
+      &-header {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem 0.5rem;
+        align-items: center;
+        justify-content: space-between;
+        margin: 1rem;
+
+        &-1 {
+          font-size: 1.2rem;
+
+          @include respond(lantab) {
+            font-size: 1.6rem;
+          }
+        }
+        &-2 {
+          font-size: 1.6rem;
+          @include respond(lantab) {
+            font-size: 2rem;
+          }
+        }
+        &-3 {
+          fill: orangered;
+          font-size: 1.2rem;
+          @include respond(lantab) {
+            font-size: 1.8rem;
+          }
+          &-icon {
+            fill: green;
+            font-size: 1.2rem;
+            @include respond(lantab) {
+              font-size: 1.8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.subsubsection {
+  &--1 {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    @include respond(lantab) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  &--thirdCheader {
+    font-size: 2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    margin-bottom: 1rem;
+    @include respond(lantab) {
+      margin-bottom: 3rem;
+    }
+  }
+  &--features {
+    display: flex;
+    font-size: 1.4rem;
+    justify-content: space-between;
+    height: 20rem;
+    @include respond(lantab) {
+      flex-direction: column;
+      justify-content: start;
+    }
+  }
+
+  &--features-1,
+  &--features-2,
+  &--features-3 {
+    flex: 0 0 30%;
+    @include respond(lantab) {
+      flex: 0 0 100%;
+      width: 50%;
+      margin: 0 auto;
+      &:not(:last-of-type) {
+        margin-bottom: 1rem;
+      }
+    }
+    @include respond(portab) {
+      width: 100%;
+    }
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0.5rem 0.5rem 1rem rgba($color: #000000, $alpha: 0.3);
+    transition: all 0.1s;
+    &:hover {
+      transform: translateY(-0.5rem) scale(1.03);
+    }
+  }
+
+  &--fourthHeader {
+    margin-bottom: 0.5rem;
+    @include respond(lantab) {
+      font-size: 2rem;
+      font-weight: 300;
+    }
+  }
+
+  &--middle {
+    display: flex;
+    justify-content: space-around;
+    &-1 {
+      font-size: 3.6rem;
+    }
+    &-2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      &-1 {
+        font-size: 1.2rem;
+        &-green {
+          fill: rgb(74, 161, 243);
+          font-size: 1.4rem;
+        }
+        &-red {
+          fill: rgb(247, 97, 117);
+          font-size: 1.4rem;
+        }
+      }
+      &-2 {
+        font-size: 1.1rem;
+        @include respond(lantab) {
+          font-size: 1.6rem;
+          letter-spacing: 0.1rem;
+        }
+      }
+    }
+  }
+
+  &--2 {
+    padding: 1.5rem;
+    &-lastdiv {
+      box-shadow: 0.5rem 0.5rem 2rem rgba($color: #000000, $alpha: 0.3);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      &-1 {
+        display: flex;
+        font-size: 1.4rem;
+        &-1 {
+          margin-right: auto;
+          font-weight: 600;
+          word-spacing: 0.1rem;
+          @include respond(lantab) {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+          }
+        }
+        &-2,
+        &-3 {
+          border: none;
+          padding: 1rem 2rem;
+          font-family: "Lato", sans-serif;
+          border-radius: 0.5rem;
+          margin-left: 0.5rem;
+          transition: all 0.1s;
+          &:hover {
+            box-shadow: 0.5rem 1rem 1.5rem rgba($color: #000000, $alpha: 0.3);
+            background-color: #777;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+.sidebar {
+  box-shadow: 0.5rem 0.5rem 2rem rgba($color: #000000, $alpha: 0.3);
+  z-index: 100;
+  &-up {
+    flex: 0 0 15%;
+    background-color: var(--color-black-dark);
+    display: grid;
+    grid-template-rows: 5rem 5rem 5rem;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  &-down {
+    flex: 1;
+    background-color: var(--color-black-light);
+    z-index: 99;
+    padding: 4rem 3rem;
+  }
+}
+
+/************************/
+.sideLastButton {
+  align-self: center;
+  justify-self: end;
+  padding: 1rem 2rem;
+  background-color: var(--color-white);
+  border: none;
+  border-radius: 2px;
+  @include respond(lantab) {
+    padding: 0.7rem 1.5rem;
+  }
+}
